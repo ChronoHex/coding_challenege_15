@@ -30,6 +30,15 @@ function addRiskItem(riskName, riskLevel, department) {
         <p>Department: ${department}</p>
         <button class="resolveButton">Resolve</button>
     `;// creates risk card with variables
+
+    // task 4
+    if (riskLevel === 'Low') {
+        riskCard.style.backgroundColor = 'green';
+    } else if (riskLevel === 'Medium') {
+        riskCard.style.backgroundColor = 'yellow';
+    } else if (riskLevel === 'High') {
+        riskCard.style.backgroundColor = 'red';
+    }
     
     if (riskDashboard) {
         riskDashboard.appendChild(riskCard); // appending to risk dashboard
@@ -42,10 +51,12 @@ function addRiskItem(riskName, riskLevel, department) {
         riskDashboard.removeChild(riskCard); // removes risk card
     }); // event resolve button
 
-
 }; // function to add risk item
 
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
 
 addRiskItem("Market Fluctuations", "High", "Finance");
+
+addRiskItem("Cybersecurity Threat", "High", "IT");
+addRiskItem("HR Compliance Issue", "Low", "Human Resources");
