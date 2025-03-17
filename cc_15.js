@@ -38,7 +38,7 @@ function addRiskItem(riskName, riskLevel, department) {
         riskCard.style.backgroundColor = 'yellow';
     } else if (riskLevel === 'High') {
         riskCard.style.backgroundColor = 'red';
-    }
+    }; // changes color of card based on risk level
     
     if (riskDashboard) {
         riskDashboard.appendChild(riskCard); // appending to risk dashboard
@@ -53,6 +53,32 @@ function addRiskItem(riskName, riskLevel, department) {
 
 }; // function to add risk item
 
+// task 5
+document.getElementById('increaseRiskLevels').addEventListener('click', () => {
+    const riskCards = document.querySelectorAll('.riskCard');
+
+    riskCards.forEach(card => {
+        const riskLevelElement = card.querySelector('.risk-level');
+        const riskLevel = riskLevelElement.textContent.split(': ')[1];  // Get the current risk level
+
+        let newRiskLevel;
+        if (riskLevel === 'Low') {
+            newRiskLevel = 'Medium';
+            card.style.backgroundColor = 'yellow';
+        } else if (riskLevel === 'Medium') {
+            newRiskLevel = 'High';
+            card.style.backgroundColor = 'red';
+        } else {
+            newRiskLevel = 'High';
+        }
+
+        // Update the risk level in the DOM
+        riskLevelElement.textContent = `Risk Level: ${newRiskLevel}`;
+    });
+});
+
+
+// examples
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
 
