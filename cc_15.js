@@ -10,6 +10,7 @@ if (!riskDashboard) {
 const riskForm = document.getElementById('riskForm');
 if (riskForm) {
     riskForm.addEventListener('submit', function(event) {
+        event.stopPropagation();
         event.preventDefault();
         const riskName = document.getElementById('riskName').value;
         const riskLevel = document.getElementById('riskLevel').value;
@@ -26,7 +27,7 @@ function addRiskItem(riskName, riskLevel, department) {
     riskCard.classList.add('risk-card');
     riskCard.innerHTML = `
         <h3>${riskName}</h3>
-        <p>Risk Level: ${riskLevel}</p>
+        <p class="risk-level">Risk Level: ${riskLevel}</p>
         <p>Department: ${department}</p>
         <button class="resolveButton">Resolve</button>
     `;// creates risk card with variables
@@ -47,7 +48,8 @@ function addRiskItem(riskName, riskLevel, department) {
     }
     // task 3
     const resolveButton = riskCard.querySelector('.resolveButton');
-    resolveButton.addEventListener('click', () => {
+    resolveButton.addEventListener('click', (event) => {
+        event.stopPropagation();
         riskDashboard.removeChild(riskCard); // removes risk card
     }); // event resolve button
 
@@ -55,7 +57,7 @@ function addRiskItem(riskName, riskLevel, department) {
 
 // task 5
 document.getElementById('increaseRiskLevels').addEventListener('click', () => {
-    const riskCards = document.querySelectorAll('.riskCard');
+    const riskCards = document.querySelectorAll('.risk-card');
 
     riskCards.forEach(card => {
         const riskLevelElement = card.querySelector('.risk-level');
@@ -72,7 +74,7 @@ document.getElementById('increaseRiskLevels').addEventListener('click', () => {
             newRiskLevel = 'High';
         }
 
-        // Update the risk level in the DOM
+        // Update the risk level in the Dashboard
         riskLevelElement.textContent = `Risk Level: ${newRiskLevel}`;
     });
 });
